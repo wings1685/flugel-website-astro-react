@@ -1,0 +1,10 @@
+---
+import type { DeepGuard } from "@/_global/types/types";
+import type { HTMLAttributes } from "astro/types";
+import "./VerticalList.sass";
+
+const props: DeepGuard<HTMLAttributes<'ul'>> = Astro.props;
+---
+<ul class={ `vertical_list ${props.class ?? ''}` } { ...props }>
+	<slot />
+</ul>

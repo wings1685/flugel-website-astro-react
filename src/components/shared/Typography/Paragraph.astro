@@ -1,0 +1,17 @@
+---
+import type { DeepGuard } from "@/_global/types/types";
+import type { HTMLAttributes } from "astro/types";
+import "./Paragraph.sass";
+
+type Props = (HTMLAttributes<'p'> & {
+	as?: 'p';
+}) | (HTMLAttributes<'div'> & {
+	as: 'div';
+});
+
+const props: DeepGuard<Props> = Astro.props;
+const Component = props.as ?? 'p';
+---
+<Component class:list={[ 'paragraph', props.class ]} { ...props }>
+	<slot />
+</Component>

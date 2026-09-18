@@ -1,0 +1,10 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { DeepGuard } from "@/_global/types/types";
+import "./Box.sass";
+
+const props: DeepGuard<HTMLAttributes<'div'>> = Astro.props;
+---
+<div class:list={[ 'box', props.class ]} { ...props }>
+	<slot />
+</div>

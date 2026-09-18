@@ -1,0 +1,10 @@
+---
+import { monthData } from "@/_global/lib/shared";
+import { NavButton } from "@/components/integrations";
+import "./Nav.sass";
+---
+<nav class="wrapper">
+	{Object.entries(monthData).map(([key, name]) => (
+		<NavButton month={ key } name={ name } client:visible />
+	))}
+</nav>

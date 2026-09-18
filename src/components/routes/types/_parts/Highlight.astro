@@ -1,0 +1,21 @@
+---
+import { Code } from "astro/components";
+import type { DeepGuard } from "@/_global/types/types";
+import type { CodeLanguage } from "astro";
+import "./Highlight.sass";
+
+type Props = {
+	code: string;
+	lang?: CodeLanguage;
+	filename?: string;
+};
+const { code, lang = 'ts', filename }: DeepGuard<Props> = Astro.props;
+---
+<div class="code_highlight">
+	{filename && (
+		<p class="filename monospace">{ filename }</p>
+	)}
+	<div class="shiki_wrapper">
+		<Code code={ code } lang={ lang } theme="dark-plus" class="shiki" />
+	</div>
+</div>

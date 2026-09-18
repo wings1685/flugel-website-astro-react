@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { Directions, Sizes } from "@/_global/types/components"
+import type { DeepGuard } from "@/_global/types/types";
+import "./Group.sass";
+
+type Props = HTMLAttributes<'div'> & {
+	direction?: Directions;
+	marginSize?: Extract<Sizes, 'small' | 'medium' | 'large' | 'none'>;
+}
+
+const props: DeepGuard<Props> = Astro.props;
+const direction = props.direction ?? 'center';
+const marginSize = props.marginSize ?? 'medium';
+---
+<div class:list={[ `group direction_${direction} margin_size_${marginSize}`, props.class ]} { ...props }>
+	<slot />
+</div>

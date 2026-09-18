@@ -1,0 +1,21 @@
+---
+import { Section } from "./";
+import type { HTMLAttributes } from "astro/types";
+import type { DeepGuard } from "@/_global/types/types";
+import "./Glass.sass";
+
+type Props = {
+	mini?: boolean;
+	isDark?: boolean;
+} & ( | (HTMLAttributes<'div'> & {
+	as?: 'div';
+}) | (HTMLAttributes<'section'> & {
+	as?: 'section';
+}) );
+
+const props: DeepGuard<Props> = Astro.props;
+const Component = props.as === 'section' ? Section : props.as || 'div';
+---
+<Component class="glass" class:list={[ { mini: props.mini, is_dark: props.isDark }, props.class ]} { ...props }>
+	<slot />
+</Component>

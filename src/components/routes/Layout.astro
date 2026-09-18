@@ -1,0 +1,42 @@
+---
+import { siteDescription, siteTitle } from "@/_global/lib/shared";
+import { Footer, Header, Nav } from "@/components/shared/Sections";
+import { Bg } from "../integrations";
+import "@/_global/styles/global.sass";
+
+const currentPath = Astro.url.pathname.replace(/\//g, '');
+
+type Props = {
+	title: string;
+	description?: string;
+};
+const props: Props = Astro.props;
+const title = `${props.title} | ${siteTitle}`;
+const description = props.description ?? siteDescription;
+---
+<!doctype html>
+<html lang="ja">
+	<head>
+		<title>{ title }</title>
+		<meta charset="UTF-8" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={ title } />
+		<meta property="og:description" content={ description } />
+		<meta property="og:site_name" content={ title } />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="description" content={ description } />
+		<link rel="icon" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/favicon.png" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@400&display=swap" />
+	</head>
+	<body>
+		<Header path={ currentPath } />
+		<slot />
+		<Nav />
+		<Footer />
+		<Bg client:load />
+	</body>
+</html>
