@@ -2,6 +2,7 @@
 
 稼働している自分自身の SolidStart 製屋号サイトを、Astro + React へリプレイスした実験リポジトリです。
 Solid / Svelte / Vue は、自作の SSR 安全なグローバルストア機構を利用側で同じ処理なのですが、React は状態管理の利用方法に依存するので、Astro + React のみ別リポジトリになっています。
+状態管理は、以前行った伝播速度測定により、複雑でない利用の場合は Legendapp State が最速だったので、こちらを採用しました。
 なお、本リポジトリは Astro + React のみの構成ですが、Astro + Solid / Svelte / Vue のリポジトリと同じフォルダ構成です。
 
 **Note:** 本リポジトリは、実験場という性質であるため Issues 及び Pull Requests は受け付けておりません。
@@ -35,6 +36,7 @@ Solid / Svelte / Vue は、自作の SSR 安全なグローバルストア機構
 ## Related Articles
 
 - [同一サイトの 9 フレームワークパターンでのリプレイス祭](https://wings.hatenablog.com/entry/replaceFestival)
+- [【極限編】同一 Astro 上で Solid / Svelte / Vue / React それぞれの処理速度を計測してみた（Qwik は無し）](https://wings.hatenablog.com/entry/benchmarkExtreme)
 
 ## Folder Map
 
