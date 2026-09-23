@@ -13,7 +13,6 @@ export default function Bg() {
 	const { selectedMonth$ } = useStore('selectedMonth');
 
 	const elBg = useRef<HTMLImageElement>(null);
-	const getSrcset = (month?: Months) => month ? `/images/bg/${ month }.webp 1920w, /images/bg/${ month }_sp.webp 768w` : '';
 
 	useObserve(() => {
 		const next = selectedMonth$.get();
