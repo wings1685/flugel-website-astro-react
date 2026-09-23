@@ -46,9 +46,13 @@ export default function Bg() {
 
 	return (
 		<div id="bg">
-			<img ref={ elBg } alt="" srcSet={ getSrcset(currentMonth) } data-testid="bg" />
+			<img ref={ elBg } alt="" src={ `/images/bg/${ currentMonth }.webp` } width={ 0 } height={ 0 } className="pc" />
+			<img alt="" src={ `/images/bg/${ currentMonth }_sp.webp` } width={ 0 } height={ 0 } className="sp" />
 			{selectedMonth$.get() && (
-				<img id="selected_bg" srcSet={ getSrcset(selectedMonth$.get()) } alt="" />
+				<div id="selected_bg">
+					<img src={ `/images/bg/${ selectedMonth$.get() }.webp` } alt="" width={ 0 } height={ 0 } className="pc" />
+					<img src={ `/images/bg/${ selectedMonth$.get() }_sp.webp` } alt="" width={ 0 } height={ 0 } className="sp" />
+				</div>
 			)}
 		</div>
 	)
