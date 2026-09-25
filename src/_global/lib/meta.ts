@@ -6,7 +6,7 @@ const MetaSchema = v.object({
 	description: v.optional(v.string()),
 	ogImage: v.optional(v.string()),
 });
-export type SiteMeta = v.InferOutput<typeof MetaSchema>;
+type SiteMeta = v.InferOutput<typeof MetaSchema>;
 type PageMeta = Partial<SiteMeta>;
 export type MetaData = SiteMeta & {
 	siteTitle: string,
