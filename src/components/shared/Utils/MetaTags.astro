@@ -1,0 +1,16 @@
+---
+import type { SiteMeta as Props } from "@/_global/lib/meta";
+import type { DeepGuard } from "@/_global/types/types";
+
+const props: DeepGuard<Props> = Astro.props;
+---
+<title>{ props.title }</title>
+<meta name="description" content={ props.description } />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={ props.title } />
+<meta property="og:description" content={ props.description } />
+<meta property="og:site_name" content={ props.title } />
+{props.ogImage && (
+	<meta property="og:image" content={ props.ogImage } />
+)}
+<meta name="twitter:card" content="summary_large_image" />

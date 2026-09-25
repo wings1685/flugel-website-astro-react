@@ -2,10 +2,10 @@
 import Layout from "@/components/routes/Layout.astro";
 import { Glass, Group } from "@/components/shared/Sections";
 import { PageTitle, Paragraph } from "@/components/shared/Typography";
-import { GlassButton } from "../integrations";
-import { Icon } from "../shared/Utils";
+import { GlassButton } from "@/components/integrations";
+import { Icon } from "@/components/shared/Utils";
 ---
-<Layout title="Error">
+<Layout dir="/error" meta={ { title: '404 Not Found' } }>
 	<main>
 		<Glass as="section">
 			<PageTitle icon="home">404 Not Found</PageTitle>

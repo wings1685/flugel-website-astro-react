@@ -26,5 +26,8 @@
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "@rollup/plugin-yaml": "^5.0.0"
   }
 }
