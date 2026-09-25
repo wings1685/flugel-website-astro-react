@@ -43,7 +43,7 @@ const getAvailableDirs = (paths: string[], dir: string) => {
 };
 
 export const buildMeta = (props: DeepGuard<Props>): MetaData => {
-	const { dir = '/', meta, globData, pageData } = props;
+	const { dir = '', meta, globData, pageData } = props;
 
 	const paths = getPaths(pageData);
 	if (dir && !paths.includes(dir)) {

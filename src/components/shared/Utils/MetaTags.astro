@@ -1,5 +1,5 @@
 ---
-import type { SiteMeta as Props } from "@/_global/lib/meta";
+import type { MetaData as Props } from "@/_global/lib/meta";
 import type { DeepGuard } from "@/_global/types/types";
 
 const props: DeepGuard<Props> = Astro.props;
@@ -9,7 +9,7 @@ const props: DeepGuard<Props> = Astro.props;
 <meta property="og:type" content="website" />
 <meta property="og:title" content={ props.title } />
 <meta property="og:description" content={ props.description } />
-<meta property="og:site_name" content={ props.title } />
+<meta property="og:site_name" content={ props.siteTitle } />
 {props.ogImage && (
 	<meta property="og:image" content={ props.ogImage } />
 )}
