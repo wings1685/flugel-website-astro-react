@@ -8,31 +8,49 @@ const MetaSchema = v.object({
 });
 export type SiteMeta = v.InferOutput<typeof MetaSchema>;
 type PageMeta = Partial<SiteMeta>;
+export type MetaData = SiteMeta & {
+	siteTitle: string,
+};
 
 export type YamlFiles = Record<string, {
 	default: SiteMeta;
 }>;
-type MetaInfo = Omit<SiteMeta, 'title'> & {
+type MetaInfo = Omit<MetaData, 'title'> & {
 	titles: string[];
 };
 
-type Props = {
+export type MetaProps = {
 	dir?: string;
 	meta?: PageMeta;
-	globData: YamlFiles;
 };
-export type MetaProps = Omit<Props, 'globData'>;
+type Props = MetaProps & {
+	globData: YamlFiles;
+	pageData: Record<string, unknown>;
+};
 
 const separator = ' | ';
 const convertDirectoryArray = (dir: string) => {
 	const dirs = dir.split('/');
 
-	return dirs.filter((path, index) => path || index < dirs.length - 1).map(path => path ? `${path}/` : path);
+	return dirs.map(path => path ? `${path}/` : path);
+};
+const getPaths = (pageData: Props['pageData']) => Object.keys(pageData).map(path => `/${path.split('/').slice(1, -1).join('/')}`);
+const getParentDir = (dir: string) => dir.split('/').filter((d, i) => d || i === 0).slice(0, -1).join('/') || '/';
+const getAvailableDirs = (paths: string[], dir: string) => {
+	const parentDir = getParentDir(dir);
+
+	return paths.filter(path => getParentDir(path) === parentDir);
 };
 
-export const buildMeta = (props: DeepGuard<Props>): SiteMeta => {
-	const { dir = '/', globData } = props;
-	const metaData: MetaInfo = { titles: [], description: '', ogImage: '' };
+export const buildMeta = (props: DeepGuard<Props>): MetaData => {
+	const { dir = '/', meta, globData, pageData } = props;
+
+	const paths = getPaths(pageData);
+	if (dir && !paths.includes(dir)) {
+		const availableDirs = getAvailableDirs(paths, dir);
+		console.error('Undefined directory, available directories: ', availableDirs);
+	}
+	const metaData: MetaInfo = { titles: [], description: '', ogImage: '', siteTitle: '' };
 
 	const pagePaths = convertDirectoryArray(dir);
 	const pagePath = pagePaths.slice(-1)[0];
@@ -42,6 +60,7 @@ export const buildMeta = (props: DeepGuard<Props>): SiteMeta => {
 		if (!data) return;
 
 		if (data.title && canOverrideTitle) metaData.titles = [ data.title, ...metaData.titles];
+		if (data.title && !metaData.siteTitle) metaData.siteTitle = data.title;
 		if (data.description) metaData.description = data.description;
 		if (data.ogImage) metaData.ogImage = data.ogImage;
 	};
@@ -53,15 +72,16 @@ export const buildMeta = (props: DeepGuard<Props>): SiteMeta => {
 		const data = globData[yamlPath].default;
 		v.parse(MetaSchema, data);
 
-		const canOverrideTitle = !props.meta?.title || path !== pagePath;
+		const canOverrideTitle = !meta?.title || path !== pagePath;
 		setMeta(data, canOverrideTitle);
 	});
-	setMeta(props.meta);
+	setMeta(meta);
 
-	const data: SiteMeta = {
+	const data: MetaData = {
 		title: metaData.titles.join(separator),
 		description: metaData.description,
 		ogImage: metaData.ogImage,
+		siteTitle: metaData.siteTitle,
 	};
 
 	return data;
