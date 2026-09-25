@@ -21,7 +21,7 @@ Solid / Svelte / Vue は、自作の SSR 安全なグローバルストア機構
 ## Replaced Features
 
 - SolidStart から各インテグレーションへの翻訳（静的コンポーネントは Solid JSX → Astro JSX、動的コンポーネントは JSX → React JSX、Signal → State）
-- Meta 情報用共通コンポーネントからレイアウトコンポーネントから注入方式へ変更
+- Meta 生成機構を Astro に合わせた上で適用（Solid JSX → Astro JSX、SiteMeta コンポーネント → Layout コンポーネント）
 - Shiki コードの色付け実行を Astro 標準の Code コンポーネントでビルド時に生成、クライアント時の実行なし
 
 ## Replaced Festival Repositories
@@ -37,6 +37,7 @@ Solid / Svelte / Vue は、自作の SSR 安全なグローバルストア機構
 
 - [同一サイトの 9 フレームワークパターンでのリプレイス祭](https://wings.hatenablog.com/entry/replaceFestival)
 - [【極限編】同一 Astro 上で Solid / Svelte / Vue / React それぞれの処理速度を計測してみた（Qwik は無し）](https://wings.hatenablog.com/entry/benchmarkExtreme)
+- [Meta 生成機構祭](https://wings.hatenablog.com/entry/metaFestival)
 
 ## Folder Map
 

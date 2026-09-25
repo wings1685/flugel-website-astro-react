@@ -8,7 +8,7 @@ import type { DeepGuard } from "@/_global/types/types";
 import "@/_global/styles/global.sass";
 
 const globData = import.meta.glob('./**/_data/meta.yaml', { eager: true }) as YamlFiles;
-const pageData = import.meta.glob('./**/Page.astro', { eager: true });
+const pageData = import.meta.glob('./**/Page.astro');
 
 const props: DeepGuard<MetaProps> = Astro.props;
 const meta = buildMeta({ ...props, globData, pageData });
