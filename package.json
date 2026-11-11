@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "Flügel Website Astro + React",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -28,6 +28,7 @@
     "esbuild": true
   },
   "devDependencies": {
-    "@rollup/plugin-yaml": "^5.0.0"
+    "@rollup/plugin-yaml": "^5.0.0",
+    "sass-embedded": "^1.108.2"
   }
 }
