@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import { TestHelper } from "./_models/testHelper";
-import { monthData } from "@/_global/lib/shared";
 
 test.describe('Header コンポーネントのナビゲーションテスト', () => {
 	let helper: Readonly<TestHelper>;
@@ -9,9 +8,6 @@ test.describe('Header コンポーネントのナビゲーションテスト', (
 		helper = new TestHelper(page, baseURL);
 		await helper.init();
 	});
-
-	const month = new Date().getMonth() + 1;
-	const monthString = Object.keys(monthData)[month];
 
 	test('Typesリンクをクリックしたとき、正常にパスが切り替わり active クラスが付与されるか', async ({ page }) => {
 		await expect(page).toHaveURL(helper.baseURL);
