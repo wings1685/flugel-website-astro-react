@@ -45,7 +45,7 @@ export default function Bg() {
 
 	return (
 		<div id="bg">
-			<img ref={ elBg } alt="" src={ `/images/bg/${ currentMonth }.webp` } width={ 0 } height={ 0 } className="pc" />
+			<img ref={ elBg } alt="" src={ `/images/bg/${ currentMonth }.webp` } width={ 0 } height={ 0 } className="pc" data-testid="bg" />
 			<img alt="" src={ `/images/bg/${ currentMonth }_sp.webp` } width={ 0 } height={ 0 } className="sp" />
 			{selectedMonth$.get() && (
 				<div id="selected_bg">
