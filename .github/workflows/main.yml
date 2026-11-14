@@ -10,25 +10,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # 1. Node.jsをセットアップ
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '26' # プロジェクトに合わせて変更可（LTS版など）
-          cache: 'npm'
-
-      # 2. パッケージのインストールとビルド実行（ここで dist/ が作られる）
-      - name: Install and Build
-        run: |
-          npm ci
-          npm run build
+      - uses: actions/checkout@v4
 
       - name: Install
         run: npm ci
@@ -49,6 +35,27 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Node.jsをセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '26' # プロジェクトに合わせて変更可（LTS版など）
+          cache: 'npm'
+
+      # 2. パッケージのインストールとビルド実行（ここで dist/ が作られる）
+      - name: Install and Build
+        run: |
+          npm ci
+          npm run build
 
       # 3. SSH鍵の準備
       - name: Setup SSH
